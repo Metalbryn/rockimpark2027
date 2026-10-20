@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rock im Park 2027</title>
+<meta name="description" content="Ferðaplanið okkar á Rock im Park 2027 í Nürnberg, 3.–7. júní.">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Metal+Mania&family=Permanent+Marker&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0b; --panel:#141416; --panel2:#1c1c20; --line:#2a2a30;
+    --text:#f3efe6; --muted:#9b97a0; --red:#e8231a; --red-hot:#ff4a2e; --amber:#ffb627; --ok:#3ddc84;
+    --tape:#d9d2c3; --paper:#efe8d8; --ink:#1a1714;
+    --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:clip}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+  body:before{content:"";position:fixed;inset:0;background-image:var(--grain);opacity:.07;pointer-events:none;z-index:100}
+  a{color:var(--amber)}
+  code{background:var(--panel2);padding:1px 6px;border-radius:4px;font-size:.88em}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+
+  /* ============ HERO / SVIÐIÐ ============ */
+  header.hero{position:relative;overflow:hidden;padding:30px 0 26px;isolation:isolate;
+    background:
+      radial-gradient(ellipse 60% 90% at 50% 120%,rgba(232,35,26,.55),transparent 70%),
+      linear-gradient(180deg,#050505,#120707 70%,#1a0806);}
+  /* sviðsljós */
+  header.hero:before,header.hero:after{content:"";position:absolute;top:-40%;width:42%;height:180%;z-index:-1;
+    background:linear-gradient(180deg,rgba(255,240,220,.16),transparent 75%);filter:blur(6px);transform-origin:top center;
+    animation:sweep 9s ease-in-out infinite alternate}
+  header.hero:before{left:-6%;transform:rotate(-24deg);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%)}
+  header.hero:after{right:-6%;transform:rotate(24deg);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);animation-delay:-4.5s}
+  @keyframes sweep{from{opacity:.55}to{opacity:1;filter:blur(10px)}}
+  .hero-grid{display:grid;gap:18px;align-items:end}
+  @media(min-width:820px){.hero-grid{grid-template-columns:1.35fr 1fr}}
+  .kicker{font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);font-size:.76rem}
+  h1{font-family:"Metal Mania",Anton,Impact,serif;font-weight:400;font-size:clamp(3rem,12vw,6.2rem);line-height:.88;margin:.12em 0 .08em;
+     color:var(--text);text-shadow:0 0 1px #000,3px 3px 0 var(--red),0 0 28px rgba(232,35,26,.45);letter-spacing:.01em}
+  h1 .yr{display:block;font-family:Anton,Impact,sans-serif;font-size:.5em;letter-spacing:.32em;color:var(--red-hot);text-shadow:0 0 18px rgba(255,74,46,.6);margin-top:.1em}
+  .sub{font-family:"Permanent Marker",cursive;color:var(--paper);font-size:1.15rem;margin:6px 0 0;transform:rotate(-1.5deg);display:inline-block}
+  .crew{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .crew span{background:var(--tape);color:var(--ink);padding:3px 12px 2px;font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;
+    clip-path:polygon(2% 8%,98% 0,100% 88%,4% 100%,0 50%)}
+  .crew span:nth-child(2){transform:rotate(1.5deg)} .crew span:nth-child(3){transform:rotate(-2deg)}
+  .crew{align-items:center}
+  .crew .eq{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:1.5rem;color:var(--muted);margin:0 2px}
+  .crew .bandname{font-family:"Metal Mania",Anton,serif;font-weight:400;font-size:clamp(1.7rem,6vw,2.3rem);line-height:1;color:var(--red-hot);
+    letter-spacing:.04em;text-shadow:2px 2px 0 #000,0 0 16px rgba(255,74,46,.6);transform:rotate(-3deg);display:inline-block}
+
+  /* LED niðurtalning á magnara */
+  .amp{background:linear-gradient(180deg,#1b1b1e,#0d0d0f);border:2px solid #2e2e34;border-radius:12px;padding:14px 14px 12px;position:relative;
+       box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 30px rgba(0,0,0,.6)}
+  .amp:before,.amp:after{content:"";position:absolute;top:8px;width:7px;height:7px;border-radius:50%;background:radial-gradient(#777,#222)}
+  .amp:before{left:8px}.amp:after{right:8px}
+  .amp-brand{font-family:"Metal Mania",serif;color:var(--muted);font-size:.85rem;text-align:center;letter-spacing:.1em;margin-bottom:6px}
+  .count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .count div{background:#060606;border:1px solid #232327;border-radius:8px;padding:10px 4px 8px;text-align:center}
+  .count b{display:block;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(1.9rem,8vw,2.9rem);line-height:1;
+    color:var(--red-hot);text-shadow:0 0 6px rgba(255,74,46,.9),0 0 18px rgba(232,35,26,.6);font-variant-numeric:tabular-nums}
+  .count small{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:.66rem}
+  .count-label{margin-top:8px;color:var(--muted);font-size:.85rem;text-align:center}
+
+  /* Hljómsveitaborði */
+  .ticker{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;border-top:3px solid #000;border-bottom:3px solid #000;
+          transform:rotate(-1deg) scale(1.02);margin:-4px 0 0;position:relative;z-index:2;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+  .ticker .track{display:inline-block;padding:7px 0;animation:marquee 40s linear infinite;font-family:Anton,Impact,sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.05rem}
+  .ticker .track span{margin:0 14px}
+  .ticker .track i{font-style:normal;color:#000;opacity:.65}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+
+  /* ============ FLIPAR = gaffateip ============ */
+  nav.jump{position:sticky;top:0;z-index:20;background:rgba(10,10,11,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-top:6px}
+  nav.jump .wrap{display:flex;gap:6px;overflow-x:auto;padding:12px 16px 10px;scrollbar-width:none}
+  nav.jump .wrap::-webkit-scrollbar{display:none}
+  nav.jump a{flex:none;color:var(--text);text-decoration:none;white-space:nowrap;padding:7px 14px 6px;font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;
+    background:#232327;clip-path:polygon(0 6%,4% 0,96% 4%,100% 0,98% 94%,100% 100%,3% 96%,0 100%);transition:background .15s}
+  nav.jump a:hover{background:#2f2f35}
+  nav.jump a[aria-current=page]{background:var(--red);color:#fff;transform:rotate(-1.5deg)}
+
+  /* ============ HLUTAR ============ */
+  main{min-height:70vh}
+  main > section{display:none;padding:30px 0 44px}
+  main > section.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(2.2rem,8vw,3.2rem);line-height:1;letter-spacing:.02em;margin:0 0 20px;position:relative}
+  h2 em{font-style:normal;color:var(--red-hot)}
+  h2:before{content:attr(data-k);display:block;font-family:"Permanent Marker",cursive;font-size:1rem;color:var(--amber);letter-spacing:0;text-transform:none;transform:rotate(-2deg);margin-bottom:8px}
+  .card{background:linear-gradient(180deg,var(--panel),#101012);border:1px solid var(--line);border-radius:6px;padding:18px;position:relative}
+  .grid{display:grid;gap:14px}
+  @media(min-width:720px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+  .muted{color:var(--muted)}
+  .tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border:1px solid currentColor;transform:rotate(-2deg);margin-left:4px}
+  .tag.todo{color:var(--amber)}
+  .tag.ok{color:var(--ok)}
+  .btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;padding:11px 16px;margin:8px 8px 0 0;
+       clip-path:polygon(0 0,100% 4%,98% 100%,2% 94%);transition:transform .12s}
+  .btn:hover{transform:rotate(-1deg) scale(1.03)}
+  .btn.ghost{background:#26262b;color:var(--text)}
+  .btn.spotify{background:#1ed760;color:#06110a}
+  .note{font-size:.86rem;color:var(--muted);margin-top:12px}
+  .stamp{display:inline-block;font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--red-hot);border:3px solid var(--red-hot);padding:2px 10px;transform:rotate(-4deg);font-size:1.1rem}
+
+  /* Fun fact = setlisti á blaði */
+  .setlist{background:var(--paper);color:var(--ink);padding:20px 20px 16px;position:relative;transform:rotate(-1deg);box-shadow:0 12px 28px rgba(0,0,0,.55);
+           background-image:repeating-linear-gradient(180deg,transparent 0 27px,rgba(26,23,20,.09) 27px 28px);margin:6px 0 28px}
+  .setlist:before{content:"";position:absolute;top:-12px;left:50%;width:110px;height:24px;margin-left:-55px;background:rgba(217,210,195,.85);transform:rotate(3deg);box-shadow:0 1px 2px rgba(0,0,0,.2)}
+  .setlist .lbl{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:var(--red);font-size:.9rem}
+  .setlist p{font-family:"Permanent Marker",cursive;font-size:1.18rem;line-height:1.45;margin:6px 0 8px}
+  .setlist small{color:#6b645b;font-size:.78rem}
+
+  /* VGN borði */
+  .free{display:flex;gap:14px;align-items:center;background:repeating-linear-gradient(-45deg,#ffb627 0 18px,#0a0a0b 18px 36px);padding:4px;margin:0 0 20px}
+  .free > div{background:#0a0a0b;padding:14px 16px;flex:1}
+  .free b{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:1.5rem;text-transform:uppercase;color:var(--amber);letter-spacing:.03em;display:block;line-height:1.1}
+
+  /* Tónleikaplakat / tímalína */
+  .timeline{list-style:none;margin:0;padding:0;position:relative}
+  .timeline:before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:3px;background:repeating-linear-gradient(180deg,var(--red) 0 8px,transparent 8px 14px)}
+  .timeline li{position:relative;padding:0 0 22px 40px}
+  .timeline li:before{content:"";position:absolute;left:3px;top:4px;width:19px;height:19px;border-radius:50%;background:var(--bg);border:3px solid var(--red)}
+  .timeline li.fest:before{background:var(--red);box-shadow:0 0 12px rgba(232,35,26,.8)}
+  .timeline .d{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.04em;font-size:1.25rem}
+  .timeline .t{color:var(--muted);font-size:.95rem}
+  .timeline .t b{color:var(--text)}
+  .leg{margin-top:8px;background:var(--panel);border-left:4px solid var(--red);padding:10px 12px;font-size:.95rem}
+  .leg b{color:var(--amber)}
+
+  /* Næst á svið */
+  .now{display:grid;gap:14px}
+  @media(min-width:720px){.now{grid-template-columns:1fr 1fr}}
+  .now .big{font-family:Anton,Impact,sans-serif;font-size:clamp(2rem,7vw,2.6rem);line-height:1.02;text-transform:uppercase}
+  .now .live{color:var(--red-hot);font-weight:800;letter-spacing:.18em;font-size:.78rem}
+  .pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--red-hot);margin-right:6px;animation:p 1.2s infinite;box-shadow:0 0 8px var(--red-hot)}
+  @keyframes p{50%{opacity:.25}}
+
+  /* Lineup plakat */
+  .tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .tabs button{font:inherit;font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:.82rem;color:var(--text);background:#232327;border:0;padding:9px 14px;cursor:pointer;
+               clip-path:polygon(0 6%,96% 0,100% 94%,3% 100%)}
+  .tabs button[aria-selected=true]{background:var(--red)}
+  .bill{text-align:center;padding:32px 16px 28px;background:
+        radial-gradient(ellipse at 50% 0,rgba(232,35,26,.28),transparent 65%),
+        linear-gradient(180deg,#141416,#0c0c0e);border:2px solid #000;outline:1px solid var(--line);outline-offset:-8px}
+  .bill .head{font-family:"Metal Mania",Anton,serif;font-size:clamp(2.4rem,10vw,4.4rem);line-height:1;text-shadow:3px 3px 0 var(--red);margin:6px 0}
+  .bill .second{font-family:Anton,Impact,sans-serif;text-transform:uppercase;font-size:clamp(1.3rem,5vw,1.95rem);color:var(--amber);margin-top:10px;letter-spacing:.03em}
+  .bill .rest{margin-top:14px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:.98rem}
+  .bill .rest span:not(:last-child):after{content:" ✕ ";color:var(--red-hot)}
+
+  /* Kort */
+  .map{width:100%;aspect-ratio:16/10;border:2px solid #000;outline:1px solid var(--line);filter:grayscale(.35) contrast(1.1);background:var(--panel)}
+  .route{counter-reset:s;list-style:none;padding:0;margin:0}
+  .route li{counter-increment:s;position:relative;padding:4px 0 12px 40px}
+  .route li:before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;background:var(--red);color:#fff;font-family:Anton,Impact,sans-serif;font-size:1rem;display:grid;place-items:center;transform:rotate(-6deg)}
+
+  .place h3{margin:0 0 4px;font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.03em;font-size:1.2rem}
+  .place p{margin:0 0 8px;color:var(--muted);font-size:.95rem}
+
+  .pack label{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+  .pack input{width:20px;height:20px;accent-color:var(--red)}
+  .pack label.done span{text-decoration:line-through;text-decoration-color:var(--red-hot);text-decoration-thickness:2px;color:var(--muted)}
+
+  .pager{display:flex;justify-content:space-between;gap:10px;margin-top:30px}
+  .pager a{flex:1;text-decoration:none;color:var(--text);background:#18181b;border:1px solid var(--line);padding:12px 14px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:.9rem}
+  .pager a:hover{border-color:var(--red)}
+  .pager a.next{text-align:right}
+  .pager small{display:block;color:var(--red-hot);font-weight:800;font-size:.7rem;letter-spacing:.14em}
+
+  footer{padding:30px 0 60px;color:var(--muted);font-size:.82rem;text-align:center;border-top:1px solid var(--line)}
+  footer .horns{font-family:"Metal Mania",serif;font-size:1.4rem;color:var(--text);display:block;margin-bottom:6px}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker">Nürnberg · Zeppelinfeld · 4.–6. júní 2027</div>
+      <h1>Rock im Park<span class="yr">2027</span></h1>
+      <p class="sub">Eitt band. Eitt hótel. Þrír dagar af hávaða.</p>
+      <div class="crew" id="crew"></div>
+    </div>
+    <div class="amp" aria-live="polite">
+      <div class="amp-brand">⚡ Niðurtalning ⚡</div>
+      <div class="count">
+        <div><b id="cd-d">–</b><small>dagar</small></div>
+        <div><b id="cd-h">–</b><small>klst</small></div>
+        <div><b id="cd-m">–</b><small>mín</small></div>
+        <div><b id="cd-s">–</b><small>sek</small></div>
+      </div>
+      <div class="count-label" id="cd-label">Niðurtalning…</div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="track" id="ticker"></div></div>
+
+<nav class="jump" aria-label="Kaflar">
+  <div class="wrap">
+    <a href="#plan">Ferðaplan</a>
+    <a href="#naest">Næst á svið</a>
+    <a href="#lineup">Lineup</a>
+    <a href="#leid">Leiðin</a>
+    <a href="#hotel">Hótel</a>
+    <a href="#nurnberg">Nürnberg</a>
+    <a href="#spotify">Spotify</a>
+    <a href="#pakk">Pakklisti</a>
+    <a href="#gott">Gott að vita</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- FERÐAPLAN -->
+<section id="plan">
+  <div class="wrap">
+    <div class="setlist" id="fact-plan"></div>
+    <div id="mini-player" style="margin:0 0 28px"></div>
+    <h2 data-k="// tour dates">Ferða<em>plan</em></h2>
+    <ul class="timeline" id="timeline"></ul>
+    <p class="note">Flug og lestir eru ekki bókuð ennþá. Tímarnir eru dæmi byggð á sumaráætlun 2026 og þarf að staðfesta þegar við bókum. Breyttu <code>TRIP</code> í skriftunni neðst í skránni.</p>
+    <a class="btn ghost" href="https://www.bahn.de/" target="_blank" rel="noopener">Lestir á bahn.de</a>
+    <a class="btn ghost" href="https://www.icelandair.com/is/" target="_blank" rel="noopener">Icelandair</a>
+  </div>
+</section>
+
+<!-- NÆST Á SVIÐ -->
+<section id="naest">
+  <div class="wrap">
+    <h2 data-k="// running order">Hver spilar <em>næst?</em></h2>
+    <div class="now" id="now"></div>
+    <p class="note">Tímaplanið kemur venjulega út nokkrum vikum fyrir hátíð. Þegar það kemur er nóg að fylla inn í <code>TIMETABLE</code>, og þá sýnir þessi hluti sjálfkrafa hver er á sviðinu og hver kemur næst.</p>
+  </div>
+</section>
+
+<!-- LINEUP -->
+<section id="lineup">
+  <div class="wrap">
+    <h2 data-k="// the bill">Line<em>up</em></h2>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="bill" id="bill"></div>
+    <p class="note" id="lineup-note"></p>
+    <a class="btn" href="https://www.rock-im-park.com/" target="_blank" rel="noopener">rock-im-park.com</a>
+  </div>
+</section>
+
+<!-- LEIÐIN -->
+<section id="leid">
+  <div class="wrap">
+    <h2 data-k="// get to the pit">Hótel → <em>Zeppelinfeld</em></h2>
+    <div class="free">
+      <div>
+        <b>🎟️ Miðinn = frítt í strætó &amp; lest</b>
+        Hátíðarmiðinn gildir sem frír samgöngumiði í VGN-kerfinu í Nürnberg (S-Bahn, sporvagnar, strætó og U-Bahn) yfir hátíðardagana. Dagsmiði gildir á sínum degi. Það þarf ekki að kaupa neina aukamiða á svæðið, bara sýna miðann.
+        <div class="muted" style="font-size:.85rem;margin-top:6px">ICE-lestin frá Frankfurt er utan VGN og ekki innifalin.</div>
+      </div>
+    </div>
+    <div class="grid g2">
+      <iframe class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Leið frá Hotel Victoria að Zeppelinfeld"
+        src="https://maps.google.com/maps?saddr=Hotel+Victoria,+K%C3%B6nigstra%C3%9Fe+80,+90402+N%C3%BCrnberg&daddr=Zeppelinfeld,+N%C3%BCrnberg&dirflg=r&output=embed"></iframe>
+      <div class="card">
+        <ol class="route">
+          <li><b>Labba yfir á Nürnberg Hbf.</b> Hótelið er beint á móti aðallestarstöðinni, um 3 mín.</li>
+          <li><b>S2 í átt að Altdorf</b> og farið út á <b>Dutzendteich</b>. Hraðasta leiðin, örfáar stoppistöðvar.</li>
+          <li><b>Eða sporvagn 7 eða 10</b> í átt að Dutzendteich (sama stoppistöð).</li>
+          <li>Frá Dutzendteich er stuttur gangur að hliðunum á Zeppelinfeld.</li>
+        </ol>
+        <p class="muted" style="font-size:.95rem"><b style="color:var(--text)">Heim um nóttina:</b> S-Bahn og sporvagnar ganga til Hbf til u.þ.b. 02:30, og næturvagnar N3, N4 og N15 eftir það. Það verður troðið eftir headliner, svo gott er að hinkra í 20 mín og fá sér einn í viðbót.</p>
+        <a class="btn" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/dir/?api=1&origin=Hotel+Victoria+K%C3%B6nigstra%C3%9Fe+80+N%C3%BCrnberg&destination=Zeppelinfeld+N%C3%BCrnberg&travelmode=transit">Opna í Google Maps</a>
+        <a class="btn ghost" href="https://www.rock-im-park.com/en/info/anreise" target="_blank" rel="noopener">Opinberar ferðaupplýsingar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HÓTEL -->
+<section id="hotel">
+  <div class="wrap">
+    <h2 data-k="// crash pad">Hótel<em>ið</em></h2>
+    <div class="card">
+      <span class="stamp" style="float:right">Bókað</span>
+      <h3 style="margin:0 0 4px;font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:1.6rem">Hotel Victoria Nürnberg</h3>
+      <p class="muted" style="margin:0 0 10px">Königstraße 80, 90402 Nürnberg · +49 911 24050</p>
+      <p style="margin:0">Fjögurra stjörnu hótel frá 1896, við Königstor-turninn rétt innan við gömlu borgarmúrana og beint á móti aðallestarstöðinni. Gamli bærinn er í göngufæri og S-Bahn á hátíðina fer nánast frá dyrunum.</p>
+      <p class="muted" style="margin:10px 0 0">Innritun 3. júní · Útritun 7. júní (4 nætur)</p>
+      <a class="btn ghost" href="https://www.hotelvictoria.de/en/" target="_blank" rel="noopener">hotelvictoria.de</a>
+      <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Hotel+Victoria+K%C3%B6nigstra%C3%9Fe+80+N%C3%BCrnberg" target="_blank" rel="noopener">Á korti</a>
+    </div>
+  </div>
+</section>
+
+<!-- NÜRNBERG -->
+<section id="nurnberg">
+  <div class="wrap">
+    <h2 data-k="// off-stage">Nürnberg <em>á milli tónleika</em></h2>
+    <div class="setlist" id="fact-city"></div>
+    <div class="grid g3" id="places"></div>
+  </div>
+</section>
+
+<!-- SPOTIFY -->
+<section id="spotify">
+  <div class="wrap">
+    <h2 data-k="// pre-party">Upphitunar<em>listinn</em></h2>
+    <div id="spotify-box"></div>
+  </div>
+</section>
+
+<!-- PAKKLISTI -->
+<section id="pakk">
+  <div class="wrap">
+    <h2 data-k="// load-in">Pakk<em>listi</em></h2>
+    <div class="grid g2">
+      <div class="card pack" id="pack1"></div>
+      <div class="card pack" id="pack2"></div>
+    </div>
+    <p class="note">Hökin vistast bara í þínum vafra, svo hver og einn hefur sinn lista.</p>
+  </div>
+</section>
+
+<!-- GOTT AÐ VITA -->
+<section id="gott">
+  <div class="wrap">
+    <h2 data-k="// roadie notes">Gott að <em>vita</em></h2>
+    <div class="grid g3">
+      <div class="card"><b>🎟️ Samgöngur</b><p class="muted">Hátíðarmiðinn gildir frítt í allar VGN-samgöngur í Nürnberg yfir hátíðina. Bara sýna miðann.</p></div>
+      <div class="card"><b>🕑 Tími</b><p class="muted">Þýskaland er 2 klst á undan Íslandi á sumrin (CEST).</p></div>
+      <div class="card"><b>🔌 Rafmagn</b><p class="muted">Sömu klær og heima (tegund C/F, 230 V), svo ekkert millistykki þarf.</p></div>
+      <div class="card"><b>💶 Peningar</b><p class="muted">Evrur. Hátíðin er að mestu greiðslukortavæn, en hafðu smá reiðufé fyrir bjórgarða og pylsubása.</p></div>
+      <div class="card"><b>🚨 Neyðarnúmer</b><p class="muted">112, sama og heima.</p></div>
+      <div class="card"><b>🤘 Hittingur</b><p class="muted" id="meet"></p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span class="horns">Stay loud 🤘</span>
+  Upplýsingar um lineup og dagsetningar eru af opinberum tilkynningum frá sept. 2026. Athugaðu <a href="https://www.rock-im-park.com/" target="_blank" rel="noopener">rock-im-park.com</a> fyrir nýjustu upplýsingar.
+</footer>
+
+<script>
+/* =====================================================================
+   BREYTTU HÉR: allt efni síðunnar er í þessum hlutum.
+   ===================================================================== */
+
+// Nöfn í hópnum
+const CREW = ["Almarr", "Grétar", "Brynjar"];
+const CREW_NAME = "MÉTALBRYN";
+
+// Hvar við hittumst ef við týnumst á svæðinu
+const MEETING_POINT = "Ákveðum fastan stað við aðalsviðið þegar við komum á svæðið, til dæmis við hljóðmannsturninn. (Uppfæra hér.)";
+
+// Ferðaplan. confirmed:false þýðir að það er ekki bókað ennþá.
+const TRIP = {
+  outbound: {
+    date: "2027-06-03",
+    flight: { no: "FI520?", from: "KEF", dep: "07:20", to: "FRA", arr: "13:00", confirmed: false,
+              note: "Morgunflug Icelandair (sumaráætlun 2026). Lufthansa flýgur líka KEF–FRA." },
+    train:  { from: "Frankfurt (M) Flughafen Fernbf", dep: "14:41", to: "Nürnberg Hbf", arr: "16:58", type: "ICE", confirmed: false,
+              note: "Bein ICE-lest, ~2 klst 17 mín. Gefum okkur ~1,5 klst eftir lendingu fyrir töskur. Lestarstöðin er beint við flugstöðina." }
+  },
+  inbound: {
+    date: "2027-06-07",
+    train:  { from: "Nürnberg Hbf", dep: "09:00", to: "Frankfurt (M) Flughafen Fernbf", arr: "11:19", type: "ICE", confirmed: false,
+              note: "Bein ICE, ~2 klst 19 mín. Mánudagsmorgunn eftir sunnudagskvöld, svo stillið vekjaraklukkuna." },
+    flight: { no: "FI521?", from: "FRA", dep: "14:00", to: "KEF", arr: "15:45", confirmed: false,
+              note: "Síðdegisflug Icelandair heim (sumaráætlun 2026)." }
+  }
+};
+
+// Hátíðin: tónlist byrjar um kl. 12:30 hvern dag (miðað við 2026)
+const FESTIVAL_START = "2027-06-04T12:30:00+02:00";
+const FESTIVAL_END   = "2027-06-07T02:00:00+02:00";
+const DEPART = "2027-06-03T07:20:00+00:00";
+
+// Lineup Rock im Park (fyrsta tilkynning, sept. 2026). Fleiri bönd bætast við.
+const LINEUP = {
+  "2027-06-04": { label: "Föstudagur 4. júní", head: "Turnstile", second: ["Faith No More"],
+                  rest: ["Bad Religion", "Bullet For My Valentine", "Nothing But Thieves", "I Prevail"] },
+  "2027-06-05": { label: "Laugardagur 5. júní", head: "Bring Me The Horizon", second: ["Parkway Drive", "Evanescence"],
+                  rest: ["Amon Amarth", "Arch Enemy", "Lorna Shore", "Motionless In White", "Imminence"] },
+  "2027-06-06": { label: "Sunnudagur 6. júní", head: "blink-182", second: ["The Prodigy", "Falling In Reverse"],
+                  rest: ["Billy Talent", "Beartooth", "Poppy", "Simple Plan", "Donots", "Trailerpark"] },
+  tba:          { label: "Dagur ekki kominn", head: "Die Toten Hosen", second: [],
+                  rest: ["Orbit Culture", "Ski Aggu"] }
+};
+
+// Tímaplan. Fyllist út þegar það kemur. Snið:
+// { day:"2027-06-06", stage:"Utopia Stage", band:"blink-182", start:"21:30", end:"23:15" }
+// (Tímar eftir miðnætti: setjið næsta dag sem "day".)
+const TIMETABLE = [
+];
+
+// Spotify: „Rock im Park 2027 Official Playlist“.
+// Opnaðu listann í Spotify → Deila → Afrita hlekk, og límdu hann hér. Þá birtist spilarinn beint á síðunni.
+const SPOTIFY_PLAYLIST = "https://open.spotify.com/playlist/0wOntTCLYJL8rQm5TbnVFz";
+
+// Fun fact dagsins: ný staðreynd birtist sjálfkrafa á hverjum degi
+const FACTS = [
+  "Nürnberger Rostbratwurst er með vernduð upprunaheiti í ESB. Til að mega kallast það verður pylsan að vera framleidd í Nürnberg, og hún er bara 7–9 cm löng.",
+  "„Drei im Weggla“ er frankónsk mállýska og þýðir þrjár litlar pylsur í brauðbollu. Það er klassíski götubitinn í borginni.",
+  "Fyrsta járnbraut Þýskalands opnaði 7. desember 1835 á milli Nürnberg og Fürth. Eimreiðin hét „Adler“, Örninn.",
+  "Elsti varðveitti jarðarhnöttur heims, „Erdapfel“ eftir Martin Behaim, var gerður í Nürnberg árið 1492, sama ár og Kólumbus sigldi vestur. Hann er í Germanisches Nationalmuseum.",
+  "Peter Henlein, lásasmiður í Nürnberg, er talinn meðal fyrstu smiða vasaúra í upphafi 16. aldar. Úrin voru kölluð „Nürnberg-egg“.",
+  "Albrecht Dürer, frægasti listamaður þýsku endurreisnarinnar, fæddist í Nürnberg árið 1471 og bjó þar mestalla ævi. Húsið hans stendur enn við kastalann.",
+  "Nürnberg-réttarhöldin 1945–46 fóru fram í dómsal 600 í Justizpalast. Salurinn var notaður sem venjulegur dómsalur allt til ársins 2020.",
+  "Christkindlesmarkt í Nürnberg er einn elsti og frægasti jólamarkaður heims, með rætur aftur á 17. öld.",
+  "Á hverjum degi kl. 12 á hádegi lifnar klukkan á Frauenkirche við: sjö kjörfurstar ganga hring í kringum Karl IV keisara. Það heitir „Männleinlaufen“.",
+  "Gullna bullan frá 1356 kvað á um að hver nýkjörinn konungur hins heilaga rómverska ríkis skyldi halda sitt fyrsta ríkisþing í Nürnberg.",
+  "Krýningardjásn hins heilaga rómverska keisaradæmis voru geymd í Nürnberg frá 1424 til 1796.",
+  "Undir gamla bænum er net klettakjallara, Felsengänge, sem voru höggnir út á miðöldum til að geyma bjór. Í seinni heimsstyrjöld voru þeir loftvarnabyrgi.",
+  "Nürnberger Rotbier er rauðleitur, maltríkur bjór með aldagamla sögu í borginni. Hausbrauerei Altstadthof bruggar hann enn.",
+  "Nürnberger Lebkuchen, hunangs- og kryddkökur borgarinnar, eru líka með vernduðu upprunaheiti. Fínustu tegundirnar, Elisenlebkuchen, eru nánast án hveitis.",
+  "Á Henkersteg, brú böðulsins yfir Pegnitz, bjó böðull borgarinnar. Hann var útskúfaður og mátti ekki búa innan um aðra borgarbúa.",
+  "Schöner Brunnen er um 19 metra hár gotneskur gosbrunnur frá 14. öld. Sá sem snýr messinghringnum í grindverkinu á að fá ósk sína uppfyllta.",
+  "Hans Sachs, skósmiður og meistarasöngvari á 16. öld, bjó í Nürnberg. Wagner gerði hann að aðalpersónu óperunnar „Die Meistersinger von Nürnberg“.",
+  "Schedelsche Weltchronik, „Nürnberg-króníkan“, var prentuð í borginni árið 1493 og er ein mest myndskreytta bók fyrstu prentaldar.",
+  "Germanisches Nationalmuseum var stofnað árið 1852 og er stærsta menningarsögusafn þýska málsvæðisins.",
+  "1. FC Nürnberg, „Der Club“, hefur orðið þýskur meistari níu sinnum og átti metið yfir flesta titla þar til Bayern München fór fram úr á 9. áratugnum.",
+  "Neðanjarðarlestin í Nürnberg var sú fyrsta í Þýskalandi sem keyrði ökumannslausar lestir (frá 2008), og þær deila jafnvel teinum með lestum með ökumanni.",
+  "Spielwarenmesse, alþjóðlega leikfangasýningin í Nürnberg, er ein sú stærsta í heimi og er haldin á hverju ári.",
+  "Adidas og Puma eru bæði með höfuðstöðvar í Herzogenaurach, um 25 km frá Nürnberg. Fyrirtækin urðu til þegar Dassler-bræðurnir slitu samstarfi.",
+  "Playmobil er með höfuðstöðvar í Zirndorf, rétt utan við Nürnberg.",
+  "Stór hluti miðaldamúrsins í kringum gamla bæinn stendur enn, með fjölda varðturna. Hótelið okkar er við einn þeirra, Königstor.",
+  "Um 90% gamla bæjarins eyðilögðust í loftárás 2. janúar 1945. Kirkjurnar, kastalinn og fjöldi húsa voru endurbyggð eftir stríð.",
+  "Nürnberg er næststærsta borg Bæjaralands, á eftir München.",
+  "Á tveggja ára fresti er valið nýtt „Christkind“ í Nürnberg, ung kona sem opnar jólamarkaðinn af svölum Frauenkirche.",
+  "Zeppelinfeld, þar sem Rock im Park er haldið, var hluti af flokksþingasvæði nasista. Í dag fyllist það af tugþúsundum rokkara á hverju sumri.",
+  "Kongresshalle, rétt við hátíðarsvæðið, er ein stærsta varðveitta bygging nasistatímans og var aldrei kláruð.",
+  "Kaiserburg var aðsetur þýskra konunga og keisara á ferðum þeirra, og í um 500 ár dvöldu nær allir þjóðhöfðingjar ríkisins þar."
+];
+
+// Staðir í Nürnberg
+const PLACES = [
+  { n: "Kaiserburg", d: "Miðaldakastali efst í gamla bænum með besta útsýninu yfir borgina. Góð morgunganga.", q: "Kaiserburg Nürnberg" },
+  { n: "Hauptmarkt & Schöner Brunnen", d: "Aðaltorgið með gylltum gosbrunni. Snúðu hringnum í grindverkinu, það á að boða lukku.", q: "Hauptmarkt Nürnberg" },
+  { n: "Handwerkerhof", d: "Lítið miðaldaþorp innan múranna við Königstor, nánast við hótelið. Pylsur og handverk.", q: "Handwerkerhof Nürnberg" },
+  { n: "Bratwurst Röslein", d: "Klassískt: Nürnberger Rostbratwürste, 6 eða 12 litlar pylsur á tindiski með súrkáli.", q: "Bratwurst Röslein Nürnberg" },
+  { n: "Hausbrauerei Altstadthof", d: "Brugghús í gamla bænum sem bruggar Rotbier. Þaðan er hægt að fara í skoðunarferð um bjórkjallarana (Felsengänge).", q: "Hausbrauerei Altstadthof Nürnberg" },
+  { n: "Albrecht-Dürer-Haus", d: "Hús listamannsins Dürer frá 15. öld, við kastalann.", q: "Albrecht-Dürer-Haus Nürnberg" },
+  { n: "Weißgerbergasse", d: "Fallegasta gatan í bænum, bindingsverkshús og litlir barir.", q: "Weißgerbergasse Nürnberg" },
+  { n: "Germanisches Nationalmuseum", d: "Stærsta menningarsögusafn þýska málsvæðisins, gott ef það rignir.", q: "Germanisches Nationalmuseum Nürnberg" },
+  { n: "Dokumentationszentrum", d: "Saga flokksþingasvæðis nasista, sem er einmitt svæðið sem hátíðin er haldin á. Áhrifamikið.", q: "Dokumentationszentrum Reichsparteitagsgelände Nürnberg" }
+];
+
+// Pakklisti
+const PACK = [
+  ["Hátíðarmiðinn (gildir líka í VGN)", "Vegabréf", "Debet-/kreditkort + smá evrur", "Flug- og lestarmiðar í símanum", "Evrópska sjúkratryggingakortið", "Hleðslubanki (powerbank)", "Snúrur + hleðslutæki"],
+  ["Eyrnatappar 🔇", "Regnslá / poncho", "Sólarvörn + derhúfa", "Skór sem mega verða drullugir", "Lítill bakpoki (skoða töskureglur)", "Hettupeysa fyrir kvöldin", "Verkjalyf + plástrar"]
+];
+
+/* =====================================================================
+   KÓÐI: þarf ekki að breyta neinu hér fyrir neðan
+   ===================================================================== */
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2, "0");
+// Til að prófa: index.html?now=2027-06-05T20:00
+const urlNow = new URLSearchParams(location.search).get("now");
+const nowFn = () => urlNow ? new Date(urlNow + (urlNow.length <= 16 ? ":00+02:00" : "")) : new Date();
+const DAYS_IS = ["sunnudagur","mánudagur","þriðjudagur","miðvikudagur","fimmtudagur","föstudagur","laugardagur"];
+const MONTHS_IS = ["jan","feb","mar","apr","maí","jún","júl","ágú","sep","okt","nóv","des"];
+const fmtDate = iso => { const d = new Date(iso + "T12:00:00"); return `${DAYS_IS[d.getDay()]} ${d.getDate()}. ${MONTHS_IS[d.getMonth()]}`; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// Hópur
+$("#crew").innerHTML = CREW.map(n => `<span>${esc(n)}</span>`).join("") +
+  `<b class="eq">=</b><strong class="bandname">${esc(CREW_NAME)}</strong>`;
+$("#meet").textContent = MEETING_POINT;
+
+// Hljómsveitaborði
+(() => {
+  const bands = Object.values(LINEUP).flatMap(v => [v.head, ...v.second, ...v.rest]);
+  const one = bands.map(b => `<span>${esc(b)}</span><i>✕</i>`).join("");
+  $("#ticker").innerHTML = one + one;
+})();
+
+// Fun fact dagsins (skiptir á miðnætti að staðartíma)
+(() => {
+  const n = nowFn();
+  const dayNo = Math.floor((Date.UTC(n.getFullYear(), n.getMonth(), n.getDate())) / 864e5);
+  const idx = dayNo % FACTS.length;
+  const html = `<div class="lbl">🤘 Fun fact dagsins um Nürnberg</div>
+    <p>${esc(FACTS[idx])}</p>
+    <small>Staðreynd #${idx + 1} af ${FACTS.length} · ný á morgun</small>`;
+  $("#fact-plan").innerHTML = html;
+  $("#fact-city").innerHTML = html;
+})();
+
+// Niðurtalning
+function tick(){
+  const now = nowFn();
+  let target, label;
+  if (now < new Date(DEPART))              { target = new Date(FESTIVAL_START); label = "þangað til fyrsta bandið byrjar · fös. 4. júní, u.þ.b. 12:30"; }
+  else if (now < new Date(FESTIVAL_START)) { target = new Date(FESTIVAL_START); label = "Við erum lögð af stað! Þangað til hátíðin byrjar"; }
+  else if (now < new Date(FESTIVAL_END))   { $("#cd-label").innerHTML = '<span class="pulse"></span>HÁTÍÐIN ER Í GANGI'; ["d","h","m","s"].forEach(k=>$("#cd-"+k).textContent="🤘"); return; }
+  else                                     { $("#cd-label").textContent = "Þetta var geggjað. Sjáumst 2028?"; ["d","h","m","s"].forEach(k=>$("#cd-"+k).textContent="0"); return; }
+  const diff = Math.max(0, target - now);
+  $("#cd-d").textContent = Math.floor(diff / 864e5);
+  $("#cd-h").textContent = pad(Math.floor(diff / 36e5) % 24);
+  $("#cd-m").textContent = pad(Math.floor(diff / 6e4) % 60);
+  $("#cd-s").textContent = pad(Math.floor(diff / 1e3) % 60);
+  $("#cd-label").textContent = label;
+}
+tick(); setInterval(tick, 1000);
+
+// Ferðaplan
+const status = c => c ? '<span class="tag ok">Bókað</span>' : '<span class="tag todo">Óákveðið</span>';
+const leg = (icon, x, title) => `<div class="leg">${icon} <b>${esc(title)}</b> ${status(x.confirmed)}<br>
+  ${esc(x.from)} <b>${esc(x.dep)}</b> → ${esc(x.to)} <b>${esc(x.arr)}</b><br><span class="muted">${esc(x.note)}</span></div>`;
+const o = TRIP.outbound, i = TRIP.inbound;
+$("#timeline").innerHTML = `
+  <li><div class="d">${fmtDate(o.date)} · Af stað</div>
+    ${leg("✈️", o.flight, "Flug " + o.flight.no)}
+    ${leg("🚄", o.train, o.train.type + " til Nürnberg")}
+    <div class="t" style="margin-top:8px">Innritun á Hotel Victoria og svo út að fá okkur fyrsta Rotbier og pylsur.</div></li>
+  ${Object.entries(LINEUP).filter(([k]) => k !== "tba").map(([k, v]) =>
+    `<li class="fest"><div class="d">${fmtDate(k)} · Rock im Park</div><div class="t">Headliner: <b>${esc(v.head)}</b> · 🎟️ miðinn gildir í S-Bahn og sporvagna</div></li>`).join("")}
+  <li><div class="d">${fmtDate(i.date)} · Heim</div>
+    ${leg("🚄", i.train, i.train.type + " til Frankfurt-flugvallar")}
+    ${leg("✈️", i.flight, "Flug " + i.flight.no)}</li>`;
+
+// Lineup flipar
+const keys = Object.keys(LINEUP);
+const shortLabel = k => k === "tba" ? "Óákveðið" : fmtDate(k).split(" ")[0].replace(/^./, c => c.toUpperCase());
+function showDay(k){
+  const v = LINEUP[k];
+  document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.k === k));
+  $("#bill").innerHTML = `<div class="kicker">${esc(v.label)}</div>
+    <div class="head">${esc(v.head)}</div>
+    ${v.second.length ? `<div class="second">${v.second.map(esc).join(" · ")}</div>` : ""}
+    <div class="rest">${v.rest.map(b => `<span>${esc(b)}</span>`).join("")}</div>`;
+  $("#lineup-note").textContent = k === "tba"
+    ? "Þessi bönd eru staðfest á Rock im Park 2027 en ekki er búið að tilkynna hvaða dag þau spila."
+    : "Fyrsta bylgja tilkynninga. Fleiri bönd bætast við, svo athugaðu opinberu síðuna.";
+}
+$("#tabs").innerHTML = keys.map(k => `<button role="tab" data-k="${k}">${shortLabel(k)}</button>`).join("");
+$("#tabs").addEventListener("click", e => { if (e.target.dataset.k) showDay(e.target.dataset.k); });
+const todayIso = (() => { const n = nowFn(); return new Date(n.getTime() + 2*36e5).toISOString().slice(0,10); })();
+showDay(LINEUP[todayIso] ? todayIso : keys[0]);
+
+// Hver spilar næst
+function toDate(day, hm){ return new Date(`${day}T${hm}:00+02:00`); }
+function renderNow(){
+  const now = nowFn();
+  const box = $("#now");
+  if (TIMETABLE.length){
+    const sets = TIMETABLE.map(s => ({...s, s: toDate(s.day, s.start), e: toDate(s.day, s.end)})).sort((a,b) => a.s - b.s);
+    const live = sets.filter(s => s.s <= now && now < s.e);
+    const next = sets.filter(s => s.s > now).slice(0, 4);
+    box.innerHTML = `
+      <div class="card"><div class="live"><span class="pulse"></span>Á SVIÐI NÚNA</div>
+        ${live.length ? live.map(s => `<div class="big">${esc(s.band)}</div><div class="muted">${esc(s.stage)} · til ${esc(s.end)}</div>`).join("<hr style='border-color:var(--line)'>")
+                      : `<div class="muted" style="margin-top:8px">Enginn á sviði akkúrat núna.</div>`}</div>
+      <div class="card"><div class="kicker">Næst</div>
+        ${next.length ? next.map(s => `<div style="padding:8px 0;border-bottom:1px dashed var(--line)"><b>${esc(s.start)}</b> ${esc(s.band)} <span class="muted">· ${esc(s.stage)}${s.day !== todayIso ? " · " + fmtDate(s.day) : ""}</span></div>`).join("")
+                      : `<div class="muted" style="margin-top:8px">Ekkert meira á dagskrá.</div>`}</div>`;
+    return;
+  }
+  const days = Object.keys(LINEUP).filter(k => k !== "tba");
+  const upcoming = days.find(d => toDate(d, "23:59") > now);
+  if (!upcoming){ box.innerHTML = `<div class="card"><div class="big">Búið 🤘</div><div class="muted">Hátíðinni er lokið.</div></div>`; return; }
+  const v = LINEUP[upcoming];
+  const daysLeft = Math.floor((toDate(upcoming, "12:30") - now) / 864e5);
+  box.innerHTML = `
+    <div class="card"><div class="kicker">Næsti hátíðardagur</div>
+      <div class="big">${esc(v.label)}</div>
+      <div class="muted">${toDate(upcoming, "00:00") > now ? `Eftir ${daysLeft} daga` : "Í dag!"}</div></div>
+    <div class="card"><div class="kicker">Lokar kvöldinu</div>
+      <div class="big" style="color:var(--red-hot);text-shadow:0 0 18px rgba(255,74,46,.45)">${esc(v.head)}</div>
+      <div class="muted">á undan: ${v.second.map(esc).join(", ")}</div></div>`;
+}
+renderNow(); setInterval(renderNow, 30000);
+
+// Staðir
+$("#places").innerHTML = PLACES.map(p => `<div class="card place"><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p>
+  <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.q)}" target="_blank" rel="noopener">Á korti →</a></div>`).join("");
+
+// Spotify
+(() => {
+  const m = String(SPOTIFY_PLAYLIST).match(/playlist[/:]([A-Za-z0-9]{22})/) || String(SPOTIFY_PLAYLIST).match(/^([A-Za-z0-9]{22})$/);
+  const id = m && m[1];
+  const search = "https://open.spotify.com/search/" + encodeURIComponent("Rock im Park 2027 Official Playlist") + "/playlists";
+  if (id) $("#mini-player").innerHTML =
+    `<div class="kicker" style="margin-bottom:6px">▶ Ýttu á play og hækkaðu</div>
+     <iframe style="border-radius:12px;width:100%;height:152px;border:0;display:block" loading="lazy" title="Rock im Park 2027 Official Playlist"
+       allow="autoplay; encrypted-media; clipboard-write; fullscreen; picture-in-picture"
+       src="https://open.spotify.com/embed/playlist/${id}?theme=0"></iframe>`;
+  $("#spotify-box").innerHTML = id
+    ? `<iframe style="border-radius:12px;width:100%;height:452px;border:0" loading="lazy" allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture"
+         src="https://open.spotify.com/embed/playlist/${id}?theme=0"></iframe>
+       <a class="btn spotify" href="https://open.spotify.com/playlist/${id}" target="_blank" rel="noopener">Opna í Spotify</a>`
+    : `<div class="card">
+         <span class="stamp" style="float:right">Official</span>
+         <h3 style="margin:0 0 6px;font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:1.5rem">Rock im Park 2027 Official Playlist</h3>
+         <p class="muted" style="margin:0 0 6px">Opinberi lagalisti hátíðarinnar á Spotify, uppfærður eftir því sem fleiri bönd bætast í lineupið.</p>
+         <a class="btn spotify" href="${search}" target="_blank" rel="noopener">▶ Opna á Spotify</a>
+         <p class="note">Til að fá spilarann beint á síðuna: opnaðu listann í Spotify → Deila → Afrita hlekk, og límdu hann í <code>SPOTIFY_PLAYLIST</code>.</p>
+       </div>`;
+})();
+
+// Pakklisti (vistast í localStorage ef hægt er)
+let packState = {};
+try { packState = JSON.parse(localStorage.getItem("rip27-pack") || "{}"); } catch(e) {}
+PACK.forEach((list, li) => {
+  $("#pack" + (li + 1)).innerHTML = list.map((item, ii) => {
+    const id = `${li}-${ii}`, on = !!packState[id];
+    return `<label class="${on ? "done" : ""}"><input type="checkbox" data-id="${id}" ${on ? "checked" : ""}><span>${esc(item)}</span></label>`;
+  }).join("");
+});
+document.addEventListener("change", e => {
+  if (!e.target.dataset.id) return;
+  packState[e.target.dataset.id] = e.target.checked;
+  e.target.parentElement.classList.toggle("done", e.target.checked);
+  try { localStorage.setItem("rip27-pack", JSON.stringify(packState)); } catch(err) {}
+});
+
+// Flipar: bara einn hluti sést í einu
+const SECTIONS = [...document.querySelectorAll("main > section")];
+const NAV = [...document.querySelectorAll("nav.jump a")];
+const titleOf = id => (NAV.find(a => a.hash === "#" + id) || {}).textContent || id;
+SECTIONS.forEach((s, n) => {
+  const prev = SECTIONS[n - 1], next = SECTIONS[n + 1];
+  const pager = document.createElement("div");
+  pager.className = "pager";
+  pager.innerHTML =
+    (prev ? `<a class="prev" href="#${prev.id}"><small>← Fyrri</small>${esc(titleOf(prev.id))}</a>` : "<span></span>") +
+    (next ? `<a class="next" href="#${next.id}"><small>Næst →</small>${esc(titleOf(next.id))}</a>` : "<span></span>");
+  s.querySelector(".wrap").appendChild(pager);
+});
+function showSection(id, scroll){
+  if (!SECTIONS.some(s => s.id === id)) id = SECTIONS[0].id;
+  SECTIONS.forEach(s => s.classList.toggle("active", s.id === id));
+  NAV.forEach(a => {
+    if (a.hash === "#" + id) { a.setAttribute("aria-current", "page"); a.scrollIntoView({block: "nearest", inline: "center"}); }
+    else a.removeAttribute("aria-current");
+  });
+  if (scroll) {
+    const nav = document.querySelector("nav.jump");
+    const top = nav.getBoundingClientRect().top + scrollY;
+    if (scrollY > top) scrollTo({top, behavior: "smooth"});
+  }
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || !SECTIONS.some(s => "#" + s.id === a.hash)) return;
+  e.preventDefault();
+  history.replaceState(null, "", location.pathname + location.search + a.hash);
+  showSection(a.hash.slice(1), true);
+});
+addEventListener("hashchange", () => showSection(location.hash.slice(1), true));
+showSection(location.hash.slice(1), false);
+</script>
+</body>
+</html>
