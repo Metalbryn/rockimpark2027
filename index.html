@@ -70,6 +70,17 @@
   .newsbar .in{display:flex;gap:12px;align-items:flex-start;background:#18120a;border:1px solid rgba(255,182,39,.45);border-left:5px solid var(--amber);padding:10px 14px;font-size:.93rem}
   .newsbar .badge{flex:none;font-family:Anton,Impact,sans-serif;letter-spacing:.08em;background:var(--amber);color:#000;padding:1px 8px;transform:rotate(-3deg);margin-top:2px}
   .newsbar .in.old{background:transparent;border-color:var(--line);border-left-color:var(--line);color:var(--muted);font-size:.82rem;padding:6px 12px}
+  .news{display:grid;gap:12px}
+  .news-item{display:flex;gap:14px;text-decoration:none;color:var(--text);background:linear-gradient(180deg,var(--panel),#101012);border:1px solid var(--line);padding:14px;transition:border-color .15s,transform .15s}
+  .news-item:hover{border-color:var(--red);transform:translateX(3px)}
+  .news-date{flex:none;width:58px;text-align:center;background:var(--red);color:#fff;padding:6px 0 5px;transform:rotate(-3deg);align-self:flex-start}
+  .news-date b{display:block;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:1.7rem;line-height:1}
+  .news-date span{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+  .news-body{min-width:0}
+  .news-body .badge{font-family:Anton,Impact,sans-serif;letter-spacing:.08em;background:var(--amber);color:#000;padding:0 6px;font-size:.8rem}
+  .news-title{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em;font-size:1.15rem;line-height:1.15}
+  .news-body p{margin:6px 0 6px;color:var(--muted);font-size:.93rem}
+  .news-more{color:var(--amber);font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em}
   .ticker{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;border-top:3px solid #000;border-bottom:3px solid #000;
           transform:rotate(-1deg) scale(1.02);margin:-4px 0 0;position:relative;z-index:2;box-shadow:0 6px 20px rgba(0,0,0,.5)}
   .ticker .track{display:inline-block;padding:7px 0;animation:marquee 40s linear infinite;font-family:Anton,Impact,sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.05rem}
@@ -153,6 +164,7 @@
   .bill .head{font-family:"Metal Mania",Anton,serif;font-size:clamp(2.4rem,10vw,4.4rem);line-height:1;text-shadow:3px 3px 0 var(--red);margin:6px 0}
   .bill .second{font-family:Anton,Impact,sans-serif;text-transform:uppercase;font-size:clamp(1.3rem,5vw,1.95rem);color:var(--amber);margin-top:10px;letter-spacing:.03em}
   .bill .rest{margin-top:14px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:.98rem}
+  .bill .rest span{white-space:nowrap;display:inline-block}
   .bill .rest span:not(:last-child):after{content:" ✕ ";color:var(--red-hot)}
 
   /* Kort */
@@ -214,6 +226,7 @@
     <a href="#plan">Ferðaplan</a>
     <a href="#naest">Næst á svið</a>
     <a href="#lineup">Lineup</a>
+    <a href="#frettir">Fréttir</a>
     <a href="#leid">Leiðin</a>
     <a href="#hotel">Hótel</a>
     <a href="#nurnberg">Nürnberg</a>
@@ -255,6 +268,16 @@
     <div class="bill" id="bill"></div>
     <p class="note" id="lineup-note"></p>
     <a class="btn" href="https://www.rock-im-park.com/" target="_blank" rel="noopener">rock-im-park.com</a>
+  </div>
+</section>
+
+<!-- FRÉTTIR -->
+<section id="frettir">
+  <div class="wrap">
+    <h2 data-k="// press release">Opinberar <em>fréttir</em></h2>
+    <div class="news" id="newslist"></div>
+    <p class="note">Samantekt á íslensku af fréttum á rock-im-park.com. Fréttirnar sjálfar eru á þýsku. Listinn uppfærist sjálfkrafa annan hvern dag.</p>
+    <a class="btn" href="https://www.rock-im-park.com/news" target="_blank" rel="noopener">Allar fréttir á rock-im-park.com</a>
   </div>
 </section>
 
@@ -353,7 +376,7 @@
 
 <footer>
   <span class="horns">Stay loud 🤘</span>
-  Upplýsingar um lineup og dagsetningar eru af opinberum tilkynningum frá sept. 2026. Athugaðu <a href="https://www.rock-im-park.com/" target="_blank" rel="noopener">rock-im-park.com</a> fyrir nýjustu upplýsingar.
+  Upplýsingar um lineup og dagsetningar eru af opinberum tilkynningum hátíðarinnar og uppfærast sjálfkrafa. Athugaðu <a href="https://www.rock-im-park.com/" target="_blank" rel="noopener">rock-im-park.com</a> fyrir nýjustu upplýsingar.
 </footer>
 
 <script>
@@ -396,11 +419,29 @@ const DEPART = "2027-06-03T07:20:00+00:00";
 // <<NEWS-START>>
 const NEWS = {
   date: "2026-10-21",
-  text: "Síðan uppfærist nú sjálfkrafa: Claude athugar lineupið annan hvern dag og bætir nýjum böndum og dögum inn hér."
+  text: "Önnur lineup-bylgjan: 24 ný bönd, m.a. Killswitch Engage, Pendulum, Jinjer og Clutch. Nú eru 50 bönd staðfest. Dagsmiðar eru uppseldir. Síðan uppfærist líka sjálfkrafa annan hvern dag."
 };
 // <<NEWS-END>>
 
-// Lineup Rock im Park (fyrsta tilkynning, sept. 2026). Fleiri bönd bætast við.
+// Opinberar fréttir af rock-im-park.com (nýjasta efst). Samantekt á íslensku + hlekkur.
+// <<NEWSLIST-START>>
+const NEWS_ITEMS = [
+  { date: "2026-10-21", title: "Zweite Line-up-Welle für 2027",
+    summary: "Önnur lineup-bylgjan: 24 ný bönd, m.a. Killswitch Engage, Pendulum, Jinjer, Clutch, The Devil Wears Prada og Sleeping With Sirens. Nú eru 50 bönd staðfest. Allir dagsmiðar eru uppseldir, helgarmiðar enn til.",
+    url: "https://www.rock-im-park.com/news/21-oct-26-zweite-line-up-welle-fuer-2027" },
+  { date: "2026-09-22", title: "Rock im Park bei über 50.000 verkauften Weekend Tickets",
+    summary: "Yfir 50.000 helgarmiðar seldir á Rock im Park 2027.",
+    url: "https://www.rock-im-park.com/news/22-sep-26-rock-im-park-bei-ueber-50-000-verkauften-weekend-tickets" },
+  { date: "2026-09-15", title: "Erste große Line-up-Welle für 2027",
+    summary: "Fyrsta stóra lineup-bylgjan: Die Toten Hosen og Bring Me The Horizon bætast við blink-182 sem headlinerar, auk Faith No More, Parkway Drive, Billy Talent, Evanescence, Turnstile og fleiri.",
+    url: "https://www.rock-im-park.com/news/15-sep-26-erste-grosse-line-up-welle-fuer-2027" },
+  { date: "2026-06-06", title: "blink-182 als erster Headliner für 2027 enthüllt",
+    summary: "blink-182 kynnt sem fyrsti headliner 2027 og miðasala hófst.",
+    url: "https://www.rock-im-park.com/news/06-jun-26-blink-182-als-erster-headliner-fuer-2027-enthuellt-vvk-start-am-dienstag" }
+];
+// <<NEWSLIST-END>>
+
+// Lineup Rock im Park (1. bylgja sept. 2026, 2. bylgja okt. 2026). Fleiri bönd bætast við.
 // <<LINEUP-START>>
 const LINEUP = {
   "2027-06-04": { label: "Föstudagur 4. júní", head: "Turnstile", second: ["Faith No More"],
@@ -409,8 +450,11 @@ const LINEUP = {
                   rest: ["Amon Amarth", "Arch Enemy", "Lorna Shore", "Motionless In White", "Imminence"] },
   "2027-06-06": { label: "Sunnudagur 6. júní", head: "blink-182", second: ["The Prodigy", "Falling In Reverse"],
                   rest: ["Billy Talent", "Beartooth", "Poppy", "Simple Plan", "Donots", "Trailerpark"] },
-  tba:          { label: "Dagur ekki kominn", head: "Die Toten Hosen", second: [],
-                  rest: ["Orbit Culture", "Ski Aggu"] }
+  tba:          { label: "Dagur ekki kominn", head: "Die Toten Hosen", second: ["Killswitch Engage", "Pendulum", "Clutch"],
+                  rest: ["Jinjer", "The Devil Wears Prada", "Sleeping With Sirens", "Silverstein", "Highly Suspect", "The Amity Affliction",
+                         "Holding Absence", "Novelists", "Currents", "From Ashes to New", "Guilt Trip", "SPEED", "Betontod",
+                         "Alexander Marcus", "TBS", "As December Falls", "Cenobia", "Haywire", "Mittel Alta", "Showing Teeth",
+                         "The Pretty Wild", "Orbit Culture", "Ski Aggu"] }
 };
 // <<LINEUP-END>>
 // Tímaplan. Fyllist út þegar það kemur. Snið:
@@ -561,6 +605,20 @@ $("#timeline").innerHTML = `
   <li><div class="d">${fmtDate(i.date)} · Heim</div>
     ${leg("🚄", i.train, i.train.type + " til Frankfurt-flugvallar")}
     ${leg("✈️", i.flight, "Flug " + i.flight.no)}</li>`;
+
+// Fréttir
+(() => {
+  const items = (typeof NEWS_ITEMS !== "undefined" ? NEWS_ITEMS : []).slice().sort((a, b) => b.date.localeCompare(a.date));
+  const now = nowFn();
+  $("#newslist").innerHTML = items.length ? items.map(n => {
+    const d = new Date(n.date + "T12:00:00");
+    const fresh = (now - d) / 864e5 <= 10;
+    return `<a class="news-item" href="${esc(n.url)}" target="_blank" rel="noopener">
+      <div class="news-date"><b>${d.getDate()}</b><span>${MONTHS_IS[d.getMonth()]} ${String(d.getFullYear()).slice(2)}</span></div>
+      <div class="news-body">${fresh ? '<span class="badge">NÝTT</span> ' : ""}<span class="news-title">${esc(n.title)}</span>
+        <p>${esc(n.summary)}</p><span class="news-more">Lesa fréttina →</span></div></a>`;
+  }).join("") : `<div class="card muted">Engar fréttir enn.</div>`;
+})();
 
 // Lineup flipar
 const keys = Object.keys(LINEUP);
