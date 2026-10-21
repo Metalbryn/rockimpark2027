@@ -66,6 +66,10 @@
   .count-label{margin-top:8px;color:var(--muted);font-size:.85rem;text-align:center}
 
   /* Hljómsveitaborði */
+  .newsbar{margin:14px auto 0;max-width:1000px;padding:0 16px}
+  .newsbar .in{display:flex;gap:12px;align-items:flex-start;background:#18120a;border:1px solid rgba(255,182,39,.45);border-left:5px solid var(--amber);padding:10px 14px;font-size:.93rem}
+  .newsbar .badge{flex:none;font-family:Anton,Impact,sans-serif;letter-spacing:.08em;background:var(--amber);color:#000;padding:1px 8px;transform:rotate(-3deg);margin-top:2px}
+  .newsbar .in.old{background:transparent;border-color:var(--line);border-left-color:var(--line);color:var(--muted);font-size:.82rem;padding:6px 12px}
   .ticker{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;border-top:3px solid #000;border-bottom:3px solid #000;
           transform:rotate(-1deg) scale(1.02);margin:-4px 0 0;position:relative;z-index:2;box-shadow:0 6px 20px rgba(0,0,0,.5)}
   .ticker .track{display:inline-block;padding:7px 0;animation:marquee 40s linear infinite;font-family:Anton,Impact,sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:1.05rem}
@@ -202,6 +206,8 @@
 </header>
 
 <div class="ticker" aria-hidden="true"><div class="track" id="ticker"></div></div>
+
+<div class="newsbar" id="newsbar" hidden></div>
 
 <nav class="jump" aria-label="Kaflar">
   <div class="wrap">
@@ -385,7 +391,17 @@ const FESTIVAL_START = "2027-06-04T12:30:00+02:00";
 const FESTIVAL_END   = "2027-06-07T02:00:00+02:00";
 const DEPART = "2027-06-03T07:20:00+00:00";
 
+// ===== SJÁLFVIRK UPPFÆRSLA: Claude uppfærir NEWS, LINEUP og TIMETABLE annan hvern dag =====
+// NEWS birtist sem „NÝTT“-borði efst í 10 daga eftir dagsetninguna, og síðan sem „síðast uppfært“.
+// <<NEWS-START>>
+const NEWS = {
+  date: "2026-10-21",
+  text: "Síðan uppfærist nú sjálfkrafa: Claude athugar lineupið annan hvern dag og bætir nýjum böndum og dögum inn hér."
+};
+// <<NEWS-END>>
+
 // Lineup Rock im Park (fyrsta tilkynning, sept. 2026). Fleiri bönd bætast við.
+// <<LINEUP-START>>
 const LINEUP = {
   "2027-06-04": { label: "Föstudagur 4. júní", head: "Turnstile", second: ["Faith No More"],
                   rest: ["Bad Religion", "Bullet For My Valentine", "Nothing But Thieves", "I Prevail"] },
@@ -396,12 +412,14 @@ const LINEUP = {
   tba:          { label: "Dagur ekki kominn", head: "Die Toten Hosen", second: [],
                   rest: ["Orbit Culture", "Ski Aggu"] }
 };
-
+// <<LINEUP-END>>
 // Tímaplan. Fyllist út þegar það kemur. Snið:
 // { day:"2027-06-06", stage:"Utopia Stage", band:"blink-182", start:"21:30", end:"23:15" }
 // (Tímar eftir miðnætti: setjið næsta dag sem "day".)
+// <<TIMETABLE-START>>
 const TIMETABLE = [
 ];
+// <<TIMETABLE-END>>
 
 // Spotify: „Rock im Park 2027 Official Playlist“.
 // Opnaðu listann í Spotify → Deila → Afrita hlekk, og límdu hann hér. Þá birtist spilarinn beint á síðunni.
@@ -473,6 +491,19 @@ const DAYS_IS = ["sunnudagur","mánudagur","þriðjudagur","miðvikudagur","fimm
 const MONTHS_IS = ["jan","feb","mar","apr","maí","jún","júl","ágú","sep","okt","nóv","des"];
 const fmtDate = iso => { const d = new Date(iso + "T12:00:00"); return `${DAYS_IS[d.getDay()]} ${d.getDate()}. ${MONTHS_IS[d.getMonth()]}`; };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// NÝTT-borði / síðast uppfært
+(() => {
+  if (!NEWS || !NEWS.date) return;
+  const d = new Date(NEWS.date + "T12:00:00");
+  const ageDays = (nowFn() - d) / 864e5;
+  const when = `${d.getDate()}. ${MONTHS_IS[d.getMonth()]}`;
+  const bar = $("#newsbar");
+  bar.innerHTML = ageDays <= 10
+    ? `<div class="in"><span class="badge">NÝTT</span><div><b>${esc(when)}:</b> ${esc(NEWS.text)}</div></div>`
+    : `<div class="in old">Lineup síðast uppfært ${esc(when)} · athugað sjálfkrafa annan hvern dag</div>`;
+  bar.hidden = false;
+})();
 
 // Hópur
 $("#crew").innerHTML = CREW.map(n => `<span>${esc(n)}</span>`).join("") +
