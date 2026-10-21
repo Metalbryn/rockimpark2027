@@ -134,6 +134,15 @@
   .free b{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:1.5rem;text-transform:uppercase;color:var(--amber);letter-spacing:.03em;display:block;line-height:1.1}
 
   /* Tónleikaplakat / tímalína */
+  .bookings{display:grid;gap:8px;margin:0 0 26px}
+  @media(min-width:720px){.bookings{grid-template-columns:repeat(5,1fr)}}
+  .bk{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--line);padding:10px 12px}
+  .bk.done{border-top-color:var(--ok)}
+  .bk.todo{border-top-color:var(--amber)}
+  .bk b{display:block;font-size:.92rem}
+  .bk .s{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:.85rem}
+  .bk.done .s{color:var(--ok)} .bk.todo .s{color:var(--amber)}
+  .bk small{display:block;color:var(--muted);font-size:.78rem;margin-top:3px;line-height:1.35}
   .timeline{list-style:none;margin:0;padding:0;position:relative}
   .timeline:before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:3px;background:repeating-linear-gradient(180deg,var(--red) 0 8px,transparent 8px 14px)}
   .timeline li{position:relative;padding:0 0 22px 40px}
@@ -244,8 +253,9 @@
     <div class="setlist" id="fact-plan"></div>
     <div id="mini-player" style="margin:0 0 28px"></div>
     <h2 data-k="// tour dates">Ferða<em>plan</em></h2>
+    <div class="bookings" id="bookings"></div>
     <ul class="timeline" id="timeline"></ul>
-    <p class="note">Flug og lestir eru ekki bókuð ennþá. Tímarnir eru dæmi byggð á sumaráætlun 2026 og þarf að staðfesta þegar við bókum. Breyttu <code>TRIP</code> í skriftunni neðst í skránni.</p>
+    <p class="note">Flug og lestir eru ekki bókuð ennþá. Tímarnir eru dæmi byggð á sumaráætlun 2026 og verða uppfærðir þegar við bókum. Breyttu <code>TRIP</code> í skriftunni neðst í skránni.</p>
     <a class="btn ghost" href="https://www.bahn.de/" target="_blank" rel="noopener">Lestir á bahn.de</a>
     <a class="btn ghost" href="https://www.icelandair.com/is/" target="_blank" rel="noopener">Icelandair</a>
   </div>
@@ -288,7 +298,7 @@
     <div class="free">
       <div>
         <b>🎟️ Miðinn = frítt í strætó &amp; lest</b>
-        Hátíðarmiðinn gildir sem frír samgöngumiði í VGN-kerfinu í Nürnberg (S-Bahn, sporvagnar, strætó og U-Bahn) yfir hátíðardagana. Dagsmiði gildir á sínum degi. Það þarf ekki að kaupa neina aukamiða á svæðið, bara sýna miðann.
+        Hátíðarmiðinn gildir sem frír samgöngumiði í VGN-kerfinu í Nürnberg (S-Bahn, sporvagnar, strætó og U-Bahn) yfir hátíðardagana, svo við þurfum ekki að kaupa aukamiða á svæðið. Hafið miðann við höndina ef eftirlit kemur. <a href="https://www.rock-im-park.com/en/info/anreise" target="_blank" rel="noopener">Opinberar upplýsingar</a>
         <div class="muted" style="font-size:.85rem;margin-top:6px">ICE-lestin frá Frankfurt er utan VGN og ekki innifalin.</div>
       </div>
     </div>
@@ -362,7 +372,16 @@
   <div class="wrap">
     <h2 data-k="// roadie notes">Gott að <em>vita</em></h2>
     <div class="grid g3">
-      <div class="card"><b>🎟️ Samgöngur</b><p class="muted">Hátíðarmiðinn gildir frítt í allar VGN-samgöngur í Nürnberg yfir hátíðina. Bara sýna miðann.</p></div>
+      <div class="card" style="grid-column:1/-1;border-color:rgba(255,182,39,.5)"><b>👑 VIP Upgrade (helgi)</b>
+        <p class="muted" style="margin-bottom:6px">Samkvæmt upplýsingum hátíðarinnar fylgir VIP-uppfærslunni:</p>
+        <ul class="muted" style="margin:0 0 8px;padding-left:20px">
+          <li><b style="color:var(--text)">Utopia Lounge</b>: VIP-stúka með besta útsýninu yfir Utopia Stage (aðalsviðið), með eigin bar og eigin klósettum.</li>
+          <li>Sér VIP-innritun (Check-in II) þar sem armböndin eru afhent, og sér VIP-inngangur inn á svæðið.</li>
+          <li>Aðgangur að fremsta svæði við Utopia Stage þegar pláss leyfir.</li>
+          <li>Matur og drykkir og VIP-skutla, auk Rock im Park varningspakka fyrir helgarmiða.</li>
+        </ul>
+        <p class="muted" style="margin:0;font-size:.85rem">VIP gildir bara með helgarmiða, svo hafið báða miðana með. Staðsetning og opnunartímar VIP-innritunar eru birt skömmu fyrir hátíð. <a href="https://www.rock-im-park.com/en/info/na760--camping-and-ticketinfo" target="_blank" rel="noopener">Opinberar upplýsingar →</a></p></div>
+      <div class="card"><b>🎟️ Samgöngur</b><p class="muted">Hátíðarmiðinn gildir í VGN-samgöngur í Nürnberg yfir hátíðina (S-Bahn, sporvagnar, strætó). <a href="https://www.rock-im-park.com/en/info/anreise" target="_blank" rel="noopener">Nánar</a></p></div>
       <div class="card"><b>🕑 Tími</b><p class="muted">Þýskaland er 2 klst á undan Íslandi á sumrin (CEST).</p></div>
       <div class="card"><b>🔌 Rafmagn</b><p class="muted">Sömu klær og heima (tegund C/F, 230 V), svo ekkert millistykki þarf.</p></div>
       <div class="card"><b>💶 Peningar</b><p class="muted">Evrur. Hátíðin er að mestu greiðslukortavæn, en hafðu smá reiðufé fyrir bjórgarða og pylsubása.</p></div>
@@ -389,7 +408,16 @@ const CREW = ["Almarr", "Grétar", "Brynjar"];
 const CREW_NAME = "MÉTALBRYN";
 
 // Hvar við hittumst ef við týnumst á svæðinu
-const MEETING_POINT = "Ákveðum fastan stað við aðalsviðið þegar við komum á svæðið, til dæmis við hljóðmannsturninn. (Uppfæra hér.)";
+const MEETING_POINT = "Utopia Lounge, VIP-stúkan við Utopia Stage. Ef einhver týnist: hittumst þar.";
+
+// Staða bókana (efst í Ferðaplani). done:true = bókað.
+const BOOKINGS = [
+  { what: "Hátíðarmiðar (helgi)", done: true },
+  { what: "VIP Upgrade helgi", done: true },
+  { what: "Hotel Victoria", done: true },
+  { what: "Flug KEF ⇄ FRA", done: false, note: "Grétar pantar í janúar · Almarr & Brynjar mögulega fyrr" },
+  { what: "ICE-lest FRA ⇄ NUE", done: false, note: "Bókast þegar flugtímar liggja fyrir" }
+];
 
 // Ferðaplan. confirmed:false þýðir að það er ekki bókað ennþá.
 const TRIP = {
@@ -519,7 +547,7 @@ const PLACES = [
 
 // Pakklisti
 const PACK = [
-  ["Hátíðarmiðinn (gildir líka í VGN)", "Vegabréf", "Debet-/kreditkort + smá evrur", "Flug- og lestarmiðar í símanum", "Evrópska sjúkratryggingakortið", "Hleðslubanki (powerbank)", "Snúrur + hleðslutæki"],
+  ["Hátíðarmiðinn (gildir líka í VGN)", "VIP Upgrade miðinn","Vegabréf", "Debet-/kreditkort + smá evrur", "Flug- og lestarmiðar í símanum", "Evrópska sjúkratryggingakortið", "Hleðslubanki (powerbank)", "Snúrur + hleðslutæki"],
   ["Eyrnatappar 🔇", "Regnslá / poncho", "Sólarvörn + derhúfa", "Skór sem mega verða drullugir", "Lítill bakpoki (skoða töskureglur)", "Hettupeysa fyrir kvöldin", "Verkjalyf + plástrar"]
 ];
 
@@ -590,6 +618,10 @@ function tick(){
 }
 tick(); setInterval(tick, 1000);
 
+// Staða bókana
+$("#bookings").innerHTML = BOOKINGS.map(b => `<div class="bk ${b.done ? "done" : "todo"}">
+  <span class="s">${b.done ? "✓ Bókað" : "⏳ Eftir"}</span><b>${esc(b.what)}</b>${b.note ? `<small>${esc(b.note)}</small>` : ""}</div>`).join("");
+
 // Ferðaplan
 const status = c => c ? '<span class="tag ok">Bókað</span>' : '<span class="tag todo">Óákveðið</span>';
 const leg = (icon, x, title) => `<div class="leg">${icon} <b>${esc(title)}</b> ${status(x.confirmed)}<br>
@@ -601,7 +633,7 @@ $("#timeline").innerHTML = `
     ${leg("🚄", o.train, o.train.type + " til Nürnberg")}
     <div class="t" style="margin-top:8px">Innritun á Hotel Victoria og svo út að fá okkur fyrsta Rotbier og pylsur.</div></li>
   ${Object.entries(LINEUP).filter(([k]) => k !== "tba").map(([k, v]) =>
-    `<li class="fest"><div class="d">${fmtDate(k)} · Rock im Park</div><div class="t">Headliner: <b>${esc(v.head)}</b> · 🎟️ miðinn gildir í S-Bahn og sporvagna</div></li>`).join("")}
+    `<li class="fest"><div class="d">${fmtDate(k)} · Rock im Park</div><div class="t">Headliner: <b>${esc(v.head)}</b> · 👑 VIP í Utopia Lounge · 🎟️ miðinn gildir í S-Bahn og sporvagna</div></li>`).join("")}
   <li><div class="d">${fmtDate(i.date)} · Heim</div>
     ${leg("🚄", i.train, i.train.type + " til Frankfurt-flugvallar")}
     ${leg("✈️", i.flight, "Flug " + i.flight.no)}</li>`;
