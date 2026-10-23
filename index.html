@@ -446,8 +446,8 @@ const DEPART = "2027-06-03T07:20:00+00:00";
 // NEWS birtist sem „NÝTT“-borði efst í 10 daga eftir dagsetninguna, og síðan sem „síðast uppfært“.
 // <<NEWS-START>>
 const NEWS = {
-  date: "2026-10-21",
-  text: "Önnur lineup-bylgjan: 24 ný bönd, m.a. Killswitch Engage, Pendulum, Jinjer og Clutch. Nú eru 50 bönd staðfest. Dagsmiðar eru uppseldir. Síðan uppfærist líka sjálfkrafa annan hvern dag."
+  date: "2026-10-23",
+  text: "Dagaskipting komin fyrir öll bönd: Die Toten Hosen spila föstudaginn (ásamt Turnstile, Clutch, Silverstein), Jinjer og The Devil Wears Prada laugardaginn, Killswitch Engage, Pendulum og Sleeping With Sirens sunnudaginn."
 };
 // <<NEWS-END>>
 
@@ -472,17 +472,16 @@ const NEWS_ITEMS = [
 // Lineup Rock im Park (1. bylgja sept. 2026, 2. bylgja okt. 2026). Fleiri bönd bætast við.
 // <<LINEUP-START>>
 const LINEUP = {
-  "2027-06-04": { label: "Föstudagur 4. júní", head: "Turnstile", second: ["Faith No More"],
-                  rest: ["Bad Religion", "Bullet For My Valentine", "Nothing But Thieves", "I Prevail"] },
+  "2027-06-04": { label: "Föstudagur 4. júní", head: "Die Toten Hosen", second: ["Turnstile", "Faith No More"],
+                  rest: ["Bad Religion", "Bullet For My Valentine", "Nothing But Thieves", "I Prevail", "Clutch", "Silverstein",
+                         "Highly Suspect", "Orbit Culture", "Ski Aggu", "Holding Absence", "From Ashes to New", "Betontod",
+                         "Alexander Marcus", "TBS", "Showing Teeth", "The Pretty Wild"] },
   "2027-06-05": { label: "Laugardagur 5. júní", head: "Bring Me The Horizon", second: ["Parkway Drive", "Evanescence"],
-                  rest: ["Amon Amarth", "Arch Enemy", "Lorna Shore", "Motionless In White", "Imminence"] },
+                  rest: ["Amon Amarth", "Arch Enemy", "Lorna Shore", "Motionless In White", "Jinjer", "The Devil Wears Prada",
+                         "The Amity Affliction", "Imminence", "Novelists", "SPEED", "As December Falls", "Cenobia"] },
   "2027-06-06": { label: "Sunnudagur 6. júní", head: "blink-182", second: ["The Prodigy", "Falling In Reverse"],
-                  rest: ["Billy Talent", "Beartooth", "Poppy", "Simple Plan", "Donots", "Trailerpark"] },
-  tba:          { label: "Dagur ekki kominn", head: "Die Toten Hosen", second: ["Killswitch Engage", "Pendulum", "Clutch"],
-                  rest: ["Jinjer", "The Devil Wears Prada", "Sleeping With Sirens", "Silverstein", "Highly Suspect", "The Amity Affliction",
-                         "Holding Absence", "Novelists", "Currents", "From Ashes to New", "Guilt Trip", "SPEED", "Betontod",
-                         "Alexander Marcus", "TBS", "As December Falls", "Cenobia", "Haywire", "Mittel Alta", "Showing Teeth",
-                         "The Pretty Wild", "Orbit Culture", "Ski Aggu"] }
+                  rest: ["Billy Talent", "Killswitch Engage", "Pendulum", "Beartooth", "Poppy", "Simple Plan", "Sleeping With Sirens",
+                         "Donots", "Trailerpark", "Currents", "Guilt Trip", "Haywire", "Mittel Alta"] }
 };
 // <<LINEUP-END>>
 // Tímaplan. Fyllist út þegar það kemur. Snið:
