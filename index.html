@@ -446,14 +446,17 @@ const DEPART = "2027-06-03T07:20:00+00:00";
 // NEWS birtist sem „NÝTT“-borði efst í 10 daga eftir dagsetninguna, og síðan sem „síðast uppfært“.
 // <<NEWS-START>>
 const NEWS = {
-  date: "2026-11-07",
-  text: "Ný frétt frá hátíðinni: helgarmiði + hótelgisting í miðborg Nürnberg í pakka (Travelcircus). Minnt á að almenningssamgöngur eru ókeypis með festivalmiðanum. Lineup og dagaskipting óbreytt."
+  date: "2026-11-13",
+  text: "Þriðja lineup-bylgjan: 25 ný bönd staðfest (Skindred, Wage War, Igorrr, Ghostemane, Senses Fail, Erra, Dayseeker, Hawthorne Heights o.fl.) — alls 75 bönd. Dagaskipting fyrir öll nýju böndin er komin inn."
 };
 // <<NEWS-END>>
 
 // Opinberar fréttir af rock-im-park.com (nýjasta efst). Samantekt á íslensku + hlekkur.
 // <<NEWSLIST-START>>
 const NEWS_ITEMS = [
+  { date: "2026-11-13", title: "Dritte Welle für 2027",
+    summary: "Þriðja lineup-bylgjan: 25 ný bönd, m.a. Skindred, Wage War, Igorrr, Ghostemane, Senses Fail, Erra, Dayseeker, Hawthorne Heights og Hanabie — alls 75 bönd staðfest. Dagaskipting fyrir Rock im Park er komin: Skindred, Erra, Senses Fail á föstudag; Wage War, Dayseeker, Hanabie á laugardag; Igorrr, Ghostemane, Hot Milk á sunnudag.",
+    url: "https://www.rock-im-park.com/news/13-nov-26-dritte-welle-fuer-2027" },
   { date: "2026-11-05", title: "Hotel Bundles jetzt verfügbar",
     summary: "Samstarfsaðilinn Travelcircus selur pakka með helgarmiða og 2–4 nóttum á hóteli í miðborg Nürnberg (frá 433,50 € á mann). Engin skutla: hátíðin mælir með almenningssamgöngum, sem eru ókeypis með festivalmiðanum.",
     url: "https://www.rock-im-park.com/news/05-nov-26-hotel-bundles-jetzt-verfuegbar" },
@@ -478,13 +481,17 @@ const LINEUP = {
   "2027-06-04": { label: "Föstudagur 4. júní", head: "Die Toten Hosen", second: ["Turnstile", "Faith No More"],
                   rest: ["Bad Religion", "Bullet For My Valentine", "Nothing But Thieves", "I Prevail", "Clutch", "Silverstein",
                          "Highly Suspect", "Orbit Culture", "Ski Aggu", "Holding Absence", "From Ashes to New", "Betontod",
-                         "Alexander Marcus", "TBS", "Showing Teeth", "The Pretty Wild"] },
+                         "Alexander Marcus", "TBS", "Showing Teeth", "The Pretty Wild", "Skindred", "Erra", "Senses Fail",
+                         "Slomosa", "Villanelle", "Esther Graf"] },
   "2027-06-05": { label: "Laugardagur 5. júní", head: "Bring Me The Horizon", second: ["Parkway Drive", "Evanescence"],
                   rest: ["Amon Amarth", "Arch Enemy", "Lorna Shore", "Motionless In White", "Jinjer", "The Devil Wears Prada",
-                         "The Amity Affliction", "Imminence", "Novelists", "SPEED", "As December Falls", "Cenobia"] },
+                         "The Amity Affliction", "Imminence", "Novelists", "SPEED", "As December Falls", "Cenobia", "Wage War",
+                         "Dayseeker", "Hanabie", "After The Burial", "Hawthorne Heights", "24/7 Diva Heaven", "ASAVA",
+                         "Maple's Pet Dinosaur", "THE DARK.FM"] },
   "2027-06-06": { label: "Sunnudagur 6. júní", head: "blink-182", second: ["The Prodigy", "Falling In Reverse"],
                   rest: ["Billy Talent", "Killswitch Engage", "Pendulum", "Beartooth", "Poppy", "Simple Plan", "Sleeping With Sirens",
-                         "Donots", "Trailerpark", "Currents", "Guilt Trip", "Haywire", "Mittel Alta"] }
+                         "Donots", "Trailerpark", "Currents", "Guilt Trip", "Haywire", "Mittel Alta", "Igorrr", "Ghostemane",
+                         "Hot Milk", "Hot Mulligan", "Cage Fight", "Blue Medusa", "Ladrones", "Leap", "Melrose Avenue", "Solence"] }
 };
 // <<LINEUP-END>>
 // Tímaplan. Fyllist út þegar það kemur. Snið:
